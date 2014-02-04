@@ -6,68 +6,68 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     snooze(3);
-//    //-----Editing of preferences----
-//    try
-//    {
-//        if(OS.name == "Darwin")
-//        {
-//            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-//            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-//        }
-//        else
-//        {
-//            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//            activateItem(":xTuple ERP: *_QMenuBar", "System");
-//            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//        }
-//        snooze(0.5);
-//        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
-//        {
-//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-//        }
-//        if(object.exists(":Notice.Notice_QDialog"))
-//        {
-//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-//                clickButton(":Notice.Remind me about this again._QCheckBox");
-//            snooze(0.2);
-//            waitForObject(":Notice.OK_QPushButton");
-//            clickButton(":Notice.OK_QPushButton");
-//        }
-//        
-//        waitForObject(":User Preferences.Save_QPushButton_2");
-//        clickButton(":User Preferences.Save_QPushButton_2");
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in editing preferences"+ e);
-//    }  
-//    
-//    //--------Exiting the application------
-//    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//    activateItem(":xTuple ERP: *_QMenuBar", "System");
-//    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    
-//    snooze(5);
-//    
-//    if(OS.name=="Linux")
-//        startApplication("xtuple.bin");
-//    
-//    else
-//        startApplication("xtuple");
-//    
-//    
-//    loginAppl("CONFIGURE"); 
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+        }
+        snooze(0.5);
+        if(object.exists(":Interface Options.Show windows inside workspace_QRadioButton"))
+        {
+            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        }
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.2);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        
+        waitForObject(":User Preferences.Save_QPushButton_2");
+        clickButton(":User Preferences.Save_QPushButton_2");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    }  
+    
+    //--------Exiting the application------
+    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+    activateItem(":xTuple ERP: *_QMenuBar", "System");
+    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    
+    loginAppl("CONFIGURE"); 
     snooze(2);
-//    //--------------- Set the window to Tab view mode -------------
-//    
-//    tabView();
+    //--------------- Set the window to Tab view mode -------------
+    
+    tabView();
     
     //------finding Application Edition------
     var appE = findApplicationEdition();
@@ -75,7 +75,7 @@ function main()
     
     // ----Copying Item-------
     copyItem("KCAR1","KTRUCK6");
-    
+
     //----Creating item site for kit type Item--------
     try
     {
@@ -99,8 +99,8 @@ function main()
         clickItem(":_plannerCode_XComboBox_2", "MRP-MRP Items", 0, 0, 5, Qt.LeftButton);
         snooze(0.5);
         waitForObject(":_costcat_XComboBox_2");
-        clickItem(":_costcat_XComboBox_2", "FINISHED-Finished Product - WH1", 0, 0, 5, Qt.LeftButton);		snooze(2);
-        
+        clickItem(":_costcat_XComboBox_2", "FINISHED-Finished Product - WH1", 0, 0, 5, Qt.LeftButton);	
+        snooze(2);
         waitForObject(":Select Order for Billing.Save_QPushButton");
         clickButton(":Select Order for Billing.Save_QPushButton");
         test.log("Item site is created for Kit type item");
@@ -258,11 +258,11 @@ function main()
         //-----Viewing the expired BOM's by selecting 'Show Expired' checkbox-------
         waitForObject(":xTuple ERP:*.Show Expired_QCheckBox");
         clickButton(":xTuple ERP:*.Show Expired_QCheckBox");
-        
+        snooze(1);
         if(object.exists("{column='1' container=':frame_2._bomitem_XTreeWidget' text='WPAINT1' type='QModelIndex'}"))
             test.pass("Expired items are displayed on selecting 'show Expired' checkbox");
         else
-            test.fail("Error in displaying Expired itemson selecting 'show Expired' checkbox");
+            test.fail("Expired items are not displayed on selecting 'show Expired' checkbox");
         
         
         var bom1 = new Array();
@@ -273,16 +273,10 @@ function main()
             var row = widg.topLevelItem(i);
             var obj = row.text(0);
             bom1[i] =  obj;
-            //            test.log(bom1[i]);
         }
         //----Sorting BOM Item No's ----------
         bom1.sort(function (a,b) { return a - b;});
         var countarr = bom1.length;
-        
-        //        for(i=0;i<countarr;i++)
-        //        {
-        //            test.log(bom1[i]);
-        //        }
         
         var widg1 = findObject(":frame_2._bomitem_XTreeWidget");
         var count = widg.topLevelItemCount;
@@ -681,82 +675,82 @@ function main()
     
     var sonumber = createSalesOrder("KTRUCK6", "100");
     flag = 0; 
-//    try{
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
-//        activateItem(":xTuple ERP: *_QMenuBar", "Sales");
-//        waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Sales Order");
-//        activateItem(":xTuple ERP: *.Sales_QMenu", "Sales Order");
-//        waitForObjectItem(":xTuple ERP: *.Sales Order_QMenu", "List Open...");
-//        activateItem(":xTuple ERP: *.Sales Order_QMenu", "List Open...");
-//        waitForObject(":Quotes.Query_QToolButton");
-//        clickButton(":Quotes.Query_QToolButton");
-//        
-//        //----Editing a sales order line item----
-//        waitForObject(":_list_XTreeWidget_3");
-//        openItemContextMenu(":_list_XTreeWidget_3",sonumber, 5, 5, Qt.LeftButton);
-//        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-//        activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-//        snooze(2);
-//        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-//        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
-//        snooze(0.5);
-//        waitForObject(":_lineItemsPage._soitem_XTreeWidget");
-//        clickItem(":_lineItemsPage._soitem_XTreeWidget","KTRUCK6", 0, 0, 5, Qt.LeftButton);
-//        waitForObject(":_lineItemsPage.Edit_QPushButton");
-//        clickButton(":_lineItemsPage.Edit_QPushButton");
-//        snooze(1);
-//        waitForObject(":_qtyOrdered_XLineEdit_2");
-//        findObject(":_qtyOrdered_XLineEdit_2").clear();
-//        
-//        type(":_qtyOrdered_XLineEdit_2", "500");
-//        nativeType("<Tab>");
-//        snooze(0.5);
-//        if(object.exists(":Sales Order.Yes_QPushButton"))
-//            clickButton(waitForObject(":Sales Order.Yes_QPushButton"));
-//        waitForObject(":Select Order for Billing.Save_QPushButton_2");
-//        clickButton(":Select Order for Billing.Save_QPushButton_2");
-//        if(object.exists(":Sales Order.Yes_QPushButton"))
-//            clickButton(waitForObject(":Sales Order.Yes_QPushButton"));        
-//        waitForObject(":Sales Order.Close_QPushButton");
-//        clickButton(":Sales Order.Close_QPushButton");
-//        if(object.exists(":Sales Order.Yes_QPushButton"))
-//            clickButton(waitForObject(":Sales Order.Yes_QPushButton"));
-//        snooze(0.5);
-//        waitForObject(":_lineItemsPage._soitem_XTreeWidget");
-//        var widget = findObject(":_lineItemsPage._soitem_XTreeWidget");
-//        var obj = widget.topLevelItem(0);
-//        
-//        if(obj.text(2) == "KTRUCK6" && obj.text(9) == "500.00")
-//            test.pass("SO line item edited sucessful");
-//        else
-//            test.fail("failed to edit SO Line item");
-//        
-//        clickButton(":Select Order for Billing.Save_QPushButton"); 
-//        
-//        //----------deleting a sales order--------
-//        
-//        waitForObject(":_list_XTreeWidget_3");
-//        openItemContextMenu(":_list_XTreeWidget_3",sonumber, 5, 5, Qt.LeftButton);
-//        
-//        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Delete...");
-//        activateItem(":xTuple ERP:*._menu_QMenu", "Delete...");
-//        snooze(2);
-//        if(object.exists(":Sales Order.Yes_QPushButton"))
-//            clickButton(waitForObject(":Sales Order.Yes_QPushButton"));
-//        snooze(0.5);
-//        if(!object.exists("{column='0' container=':_list_XTreeWidget_3' text='"+sonumber+"' type='QModelIndex'}"))
-//            test.pass("sales order deleted sucessfully");
-//        else
-//            test.fail("error in deleting a sales order");
-//        waitForObject(":Quotes.Close_QToolButton");
-//        clickButton(":Quotes.Close_QToolButton");
-//        
-//        
-//    }
-//    catch(e)
-//    {
-//        test.fail("error in performing operations on sales order"+e);
-//    }
+    try{
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
+        activateItem(":xTuple ERP: *_QMenuBar", "Sales");
+        waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Sales Order");
+        activateItem(":xTuple ERP: *.Sales_QMenu", "Sales Order");
+        waitForObjectItem(":xTuple ERP: *.Sales Order_QMenu", "List Open...");
+        activateItem(":xTuple ERP: *.Sales Order_QMenu", "List Open...");
+        waitForObject(":Quotes.Query_QToolButton");
+        clickButton(":Quotes.Query_QToolButton");
+        
+        //----Editing a sales order line item----
+        waitForObject(":_list_XTreeWidget_3");
+        openItemContextMenu(":_list_XTreeWidget_3",sonumber, 5, 5, Qt.LeftButton);
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
+        snooze(2);
+        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
+        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
+        snooze(0.5);
+        waitForObject(":_lineItemsPage._soitem_XTreeWidget");
+        clickItem(":_lineItemsPage._soitem_XTreeWidget","KTRUCK6", 0, 0, 5, Qt.LeftButton);
+        waitForObject(":_lineItemsPage.Edit_QPushButton");
+        clickButton(":_lineItemsPage.Edit_QPushButton");
+        snooze(1);
+        waitForObject(":_qtyOrdered_XLineEdit_2");
+        findObject(":_qtyOrdered_XLineEdit_2").clear();
+        
+        type(":_qtyOrdered_XLineEdit_2", "500");
+        nativeType("<Tab>");
+        snooze(0.5);
+        if(object.exists(":Sales Order.Yes_QPushButton"))
+            clickButton(waitForObject(":Sales Order.Yes_QPushButton"));
+        waitForObject(":Select Order for Billing.Save_QPushButton_2");
+        clickButton(":Select Order for Billing.Save_QPushButton_2");
+        if(object.exists(":Sales Order.Yes_QPushButton"))
+            clickButton(waitForObject(":Sales Order.Yes_QPushButton"));        
+        waitForObject(":Sales Order.Close_QPushButton");
+        clickButton(":Sales Order.Close_QPushButton");
+        if(object.exists(":Sales Order.Yes_QPushButton"))
+            clickButton(waitForObject(":Sales Order.Yes_QPushButton"));
+        snooze(0.5);
+        waitForObject(":_lineItemsPage._soitem_XTreeWidget");
+        var widget = findObject(":_lineItemsPage._soitem_XTreeWidget");
+        var obj = widget.topLevelItem(0);
+        
+        if(obj.text(2) == "KTRUCK6" && obj.text(9) == "500.00")
+            test.pass("SO line item edited sucessful");
+        else
+            test.fail("failed to edit SO Line item");
+        
+        clickButton(":Select Order for Billing.Save_QPushButton"); 
+        
+        //----------deleting a sales order--------
+        
+        waitForObject(":_list_XTreeWidget_3");
+        openItemContextMenu(":_list_XTreeWidget_3",sonumber, 5, 5, Qt.LeftButton);
+        
+        waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Delete...");
+        activateItem(":xTuple ERP:*._menu_QMenu", "Delete...");
+        snooze(2);
+        if(object.exists(":Sales Order.Yes_QPushButton"))
+            clickButton(waitForObject(":Sales Order.Yes_QPushButton"));
+        snooze(0.5);
+        if(!object.exists("{column='0' container=':_list_XTreeWidget_3' text='"+sonumber+"' type='QModelIndex'}"))
+            test.pass("sales order deleted sucessfully");
+        else
+            test.fail("error in deleting a sales order");
+        waitForObject(":Quotes.Close_QToolButton");
+        clickButton(":Quotes.Close_QToolButton");
+        
+        
+    }
+    catch(e)
+    {
+        test.fail("error in performing operations on sales order"+e);
+    }
     
     //-----Creating a sales order--------
     var sonumber1 = createSalesOrder("KTRUCK6", "50");
@@ -1016,8 +1010,8 @@ function main()
             waitForObject(":Sales Reps.New_QToolButton");
             clickButton(":Sales Reps.New_QToolButton");
             snooze(0.5);
-//            waitForObject(":Sales Rep Assignment._salesRep_XComboBox");
-//            clickItem(":Sales Rep Assignment._salesRep_XComboBox","1000-Sam Masters", 0, 0, 5, Qt.LeftButton);
+            //            waitForObject(":Sales Rep Assignment._salesRep_XComboBox");
+            //            clickItem(":Sales Rep Assignment._salesRep_XComboBox","1000-Sam Masters", 0, 0, 5, Qt.LeftButton);
             snooze(0.5);
             waitForObject(":Sales Rep Assignment._salesRep_XComboBox");
             clickItem(":Sales Rep Assignment._salesRep_XComboBox","SMASTERS-Sam Masters", 0, 0, 5, Qt.LeftButton);

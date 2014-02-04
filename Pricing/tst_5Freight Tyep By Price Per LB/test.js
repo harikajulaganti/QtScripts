@@ -8,7 +8,9 @@ function main()
     //-----login Application-----
     loginAppl("CONFIGURE"); 
     snooze(6);
+    //--------------- Set the window to Tab view mode -------------
     
+    tabView();
     
     //  --Create New Freight Class---
     var frgname = "FREIGHT CLASS2";
@@ -48,6 +50,8 @@ function main()
         }
     }
     snooze(0.5);
+    
+    
     //---Create New Item---
     var targetitem = "FREIGHT ITEM2";
     copyItem("YTRUCK1",targetitem);
@@ -71,10 +75,9 @@ function main()
         clickItem(":_itemGroup._freightClass_XComboBox_2",frgc,0, 0, 5, Qt.LeftButton);   
         snooze(0.5);
         prdwgt =findObject(":_prodWeight_XLineEdit_2").text;
-       var packwgt = findObject(":_packWeight_XLineEdit_2").text;
-       
-        prdwgt = prdwgt + packwgt;
-        clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
+        pckwgt =findObject(":_packWeight_XLineEdit_2").text
+                clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
+        snooze(2);
         clickButton(waitForObject(":Quotes.Close_QToolButton"));
         test.log("Item edited sucessfully");
     }
@@ -86,11 +89,7 @@ function main()
     var fcustname4 = "FCUST4";
     var custType = "NORMAL"+"-"+"Normal Domestic Customers";
     createCustomer(custType,fcustname4,"STORE1");
-    //----- To avoid unexpected blocks -------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
     //-----Create Freight Type PricingSchedule using Price Per LB------
     var Fghprcname1 ="FREIGHT PRICING SCHEDULE2 ";
     var FC = Fghprcname1 +" - " +Fghprcname1;
@@ -184,12 +183,15 @@ function main()
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
     }
+    
+    
     //---Pricing Schedule Assignment for a Customer----
     var prcAssg = Fghprcname1 +" - " +Fghprcname1; 
     prcasscust(fcustname4,prcAssg,Fghprcname1);
     //----Create SalesOrder----
     var qty = "100";
     var fsonum1 = createSalesOrder1(targetitem,qty,fcustname4);
+    
     //----Edit the Sales Order to verify the flat rate applied------
     var famnt;
     try
@@ -204,7 +206,9 @@ function main()
         snooze(2);
         clickTab(waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar"), "Line Items");
         snooze(0.5);
+        
         var famnt = findObject(":_lineItemsPage.XLineEdit_XLineEdit_2").text;
+        test.log(famnt);
         clickButton(waitForObject(":Select Order for Billing.Save_QPushButton_2"));
         clickButton(waitForObject(":Quotes.Close_QToolButton"));
         test.log("Sales Order Edited Sucessfully");
@@ -216,31 +220,36 @@ function main()
     var frgamnt=parseInt(famnt);
     test.log("prdwgt "+prdwgt+"");
     test.log("frgamt "+frgamnt+"");
-    var result = parseInt(prdwgt*qty*10);
+    test.log(pckwgt);
+    var result = (parseFloat(prdwgt)+parseFloat(pckwgt))*10*100;
     
-    test.log("result "+result+"")
-            //---Verifying the Price Per LB  calculated against the SalesOrder created----
-            if(frgamnt == result)
+    
+    test.log(result);
+    //---Verifying the Price Per LB  calculated against the SalesOrder created----
+    if(frgamnt == result)
     {
         test.pass("Price per LB freight amount calculated correctly on the SalesOrder");
     }
     else
         test.fail("Error in calculating the Price per LB freight amount on the SalesOrder");
     
+    
     //--Ship the SO Created---
     var shpfamnt =  frgissueStock(fsonum1);
     var shfamnt = parseInt(shpfamnt);
     test.log("prdwgt "+prdwgt+"");
     test.log("shpfamt "+shpfamnt+"");
-    var result = parseInt(prdwgt*qty*10);
-    test.log("resut "+result+"")
-            //---Verifying the Price Per LB  calculated against against the SalesOrder created----
-            if(shfamnt == result)
+    var result = (parseFloat(prdwgt)+parseFloat(pckwgt))*10*100;
+    test.log("resut "+result+"");
+    //---Verifying the Price Per LB  calculated against against the SalesOrder created----
+    if(shfamnt == result)
     {
         test.pass("Price per LB freight amount calculated correctly on the SalesOrder Shipment ");
     }
     else
         test.fail("Error in calculating the Price per LB freight amount on the SalesOrder Shipment");
+    
+    
     //----Create Invoice and verify the freight amount applied----
     try
     {
@@ -248,12 +257,6 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Billing"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Billing_QMenu", "Invoice"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Invoice_QMenu", "Billing Selections..."));
-        if(OS.name != "Darwin")
-        {
-            type(waitForObject(":xTuple ERP:*.Invoice_QMenu"), "<Left>");
-            type(waitForObject(":xTuple ERP:*.Billing_QMenu"), "<Left>");
-            type(waitForObject(":xTuple ERP: *.Sales_QMenu"), "<Esc>");
-        }
         openItemContextMenu(":Billing Selections._cobill_XTreeWidget",fsonum1, 5, 5, Qt.LeftButton);
         activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Create Invoice"));
         clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
@@ -266,6 +269,8 @@ function main()
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
     }
+    
+    
     //---Verifying the freight amount calculate in invoice----
     try
     {
@@ -273,12 +278,6 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Billing"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Billing_QMenu", "Invoice"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Invoice_QMenu", "List Unposted Invoices..."));
-        if(OS.name != "Darwin")
-        {
-            type(waitForObject(":xTuple ERP:*.Invoice_QMenu"), "<Left>");
-            type(waitForObject(":xTuple ERP:*.Billing_QMenu"), "<Left>");
-            type(waitForObject(":xTuple ERP: *.Sales_QMenu"), "<Esc>");
-        }
         snooze(0.5);
         clickButton(waitForObject(":Quotes.Query_QToolButton"));
         
@@ -305,8 +304,9 @@ function main()
     var invfamnt = parseInt(invframnt);
     test.log("prdwgt "+prdwgt+"");
     test.log("invfamt "+invfamnt+"");
-    var result = parseInt(prdwgt*qty*10);
+    var result =(parseFloat(prdwgt)+parseFloat(pckwgt))*10*100;
     test.log("resut "+result+"")
+            
             //----Verifying the Freight in Price Per LB  applied in Invoice-
             if(invfamnt == result)
     {
@@ -315,22 +315,20 @@ function main()
     else
         test.fail("Error in calculating the Freight amount on the Invoice Processing");
     
+    
     //----Pricing Schedule Assignment by Ship-to Address---------
     
     //---Create New Customer----
     var fcustname5 = "FCUST5";
     var shipnum = "STORE2";
     createCustomer(custType,fcustname5,shipnum);
-    //----- To avoid unexpected blocks -------
-    if(OS.name != "Windows")
-    {
-        doNothing();
-    }
+    
     //---Pricing Schedule Assignment to customer Ship-to--------
     prcassgship(fcustname5,shipnum,prcAssg);
     //----Create SalesOrder----
     var qty = "100";
     var fsonum2 = createSalesOrder1(targetitem,qty,fcustname5);
+    
     //----Edit the Sales Order to verify the flat rate applied------
     var famnt;
     try
@@ -357,7 +355,7 @@ function main()
     var frgamnt=parseInt(famnt);
     test.log("prdwgt "+prdwgt+"");
     test.log("frgamt "+frgamnt+"");
-    var result = parseInt(prdwgt*qty*10);
+    var result = (parseFloat(prdwgt)+parseFloat(pckwgt))*10*100;
     test.log("resut "+result+"")
             //---Verifying the Price Per LB  calculated against the SalesOrder created----
             if(frgamnt == result)
@@ -369,14 +367,22 @@ function main()
     
     //--Ship the SO Created---
     var shpfamnt =  frgissueStock(fsonum2);
-    var shfamnt = parseInt(shpfamnt);
+    test.log("shpfamnt "+shpfamnt+"")
+            var shfamnt = parseInt(shpfamnt);
+    var result = (parseFloat(prdwgt)+parseFloat(pckwgt))*10*100;
+    test.log("resut "+result+"");
     //---Verifying the Price Per LB  calculated against against the SalesOrder created----
-    if(shfamnt == (prdwgt*qty*10) )
+    
+    test.log(shfamnt);
+    test.log(result);
+    if(shfamnt == result )
     {
         test.pass("Price per LB freight amount calculated correctly on the SalesOrder Shipment ");
     }
     else
         test.fail("Error in calculating the Freight amount on the SalesOrder Shipment");
+    
+    
     //----Create Invoice and verify the freight amount applied----
     try
     {
@@ -384,13 +390,6 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Billing"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Billing_QMenu", "Invoice"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Invoice_QMenu", "Billing Selections..."));
-        snooze(0.5);
-        if(OS.name != "Darwin")
-        {
-            type(waitForObject(":xTuple ERP:*.Invoice_QMenu"), "<Left>");
-            type(waitForObject(":xTuple ERP:*.Billing_QMenu"), "<Left>");
-            type(waitForObject(":xTuple ERP: *.Sales_QMenu"), "<Esc>");
-        }
         snooze(0.5);
         openItemContextMenu(":Billing Selections._cobill_XTreeWidget",fsonum2, 5, 5, Qt.LeftButton);
         activateItem(waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Create Invoice"));
@@ -404,18 +403,15 @@ function main()
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
     }
+    
     //---Verifying the freight amount calculate in invoice----
     try
     {
-        activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));                                  activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Billing"));
+        activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales"));  
+        activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Billing"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Billing_QMenu", "Invoice"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Invoice_QMenu", "List Unposted Invoices..."));
-        if(OS.name != "Darwin")
-        {
-            type(waitForObject(":xTuple ERP:*.Invoice_QMenu"), "<Left>");
-            type(waitForObject(":xTuple ERP:*.Billing_QMenu"), "<Left>");
-            type(waitForObject(":xTuple ERP: *.Sales_QMenu"), "<Esc>");
-        }
+        
         clickButton(waitForObject(":Quotes.Query_QToolButton"));
         snooze(0.5);
         waitForObject(":_list_XTreeWidget_5");
@@ -437,17 +433,22 @@ function main()
         test.fail("Error in verifying the Invoice craeted:"+e);
         
     }
+    test.log("invframnt "+invframnt+"");
     var invfamnt = parseInt(invframnt);
+    test.log("invfamnt "+invfamnt+"");
+    var result =(parseFloat(prdwgt)+parseFloat(pckwgt))*10*100;
+    test.log("resut "+result+"");
     //----Verifying the Freight in Price Per LB  applied in Invoice-
-    if(invfamnt == (prdwgt*qty*10))
+    if(invfamnt == result)
     {
         test.pass("Price per LB freight amount calculated correctly on the Invoice Process ");
     }
     else
         test.fail("Error in calculating the Price per LB freight amount on the Invoice Processing");   
+    
+    
     //---Assigning Pricing Scheudle by selected Customer Type----
-   
-        //---Creaste New Customer Type----
+    //---Creaste New Customer Type----
     var custType = "FREIGHT CUSTOMER TYPE2";
     try
     {
@@ -482,11 +483,13 @@ function main()
     var fcustname6 = "FCUST6";
     var custType1 = custType+'-'+custType;
     createCustomer(custType1,fcustname6,"STORE1");
+    
     //---Assigning pricing Schedule for the Customer Type-----
     prcAssgCustType(fcustname6,custType1,custType,prcAssg);
     //----Create SalesOrder----
     var qty = "100";
     var fsonum3 = createSalesOrder1(targetitem,qty,fcustname5);
+    
     //----Edit the Sales Order to verify the flat rate applied------
     var famnt;
     try
@@ -512,10 +515,10 @@ function main()
     var frgamnt=parseInt(famnt);
     test.log("prdwgt "+prdwgt+"");
     test.log("frgamt "+frgamnt+"");
-    var result = parseInt(prdwgt*qty*10);
+    var result = (parseFloat(prdwgt)+parseFloat(pckwgt))*10*100;
     test.log("resut "+result+"")
             //---Verifying the Price Per LB  calculated against the SalesOrder created----
-            if(frgamnt == (prdwgt*qty*10))
+            if(frgamnt == result)
     {
         test.pass("Price per LB freight amount calculated correctly on the SalesOrder");
     }
@@ -524,9 +527,15 @@ function main()
     
     //--Ship the SO Created---
     var shpfamnt =  frgissueStock(fsonum3);
+    test.log("shpfamnt"+shpfamnt+"");
     var shfamnt = parseInt(shpfamnt);
+    test.log("shfamnt "+shfamnt+"");
+    var result =(parseFloat(prdwgt)+parseFloat(pckwgt))*10*100;
+    test.log("resut "+result+"");
+    
+    
     //---Verifying the Price Per LB  calculated against against the SalesOrder created----
-    if(shfamnt == (prdwgt*qty*10))
+    if(shfamnt == result)
     {
         test.pass("Price per LB freight amount calculated correctly on the SalesOrder Shipment ");
     }
@@ -540,7 +549,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP:*.Billing_QMenu", "Invoice"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Invoice_QMenu", "Billing Selections..."));
         snooze(0.5);
-        if(OS.name != "Darwin")
+        if(OS.name != "Windows")
         {
             type(waitForObject(":xTuple ERP:*.Invoice_QMenu"), "<Left>");
             type(waitForObject(":xTuple ERP:*.Billing_QMenu"), "<Left>");
@@ -558,6 +567,7 @@ function main()
             clickButton(waitForObject(":Select Order for Billing.Close_QPushButton"));
         }
     }
+    
     //---Verifying the freight amount calculate in invoice----
     try
     {
@@ -565,7 +575,7 @@ function main()
         activateItem(waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Billing"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Billing_QMenu", "Invoice"));
         activateItem(waitForObjectItem(":xTuple ERP:*.Invoice_QMenu", "List Unposted Invoices..."));
-        if(OS.name != "Darwin")
+        if(OS.name != "Windows")
         {
             type(waitForObject(":xTuple ERP:*.Invoice_QMenu"), "<Left>");
             type(waitForObject(":xTuple ERP:*.Billing_QMenu"), "<Left>");
@@ -593,8 +603,10 @@ function main()
         
     }
     var invfamnt = parseInt(invframnt);
+    var result =(parseFloat(prdwgt)+parseFloat(pckwgt))*10*100;
+    test.log("resut "+result+"");
     //----Verifying the Freight in Price Per LB  applied in Invoice-
-    if(invfamnt == (prdwgt*qty*10))
+    if(invfamnt == result)
     {
         test.pass("Price per LB freight amount calculated correctly on the Invoice Process ");
     }

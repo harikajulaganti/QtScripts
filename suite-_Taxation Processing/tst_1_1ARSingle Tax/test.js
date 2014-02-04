@@ -6,69 +6,69 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-  
-//   //-----Editing of preferences----
-//        try
-//        {
-//            if(OS.name == "Darwin")
-//            {
-//                activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
-//    activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
-//            }
-//            else
-//            {
-//
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//        activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
-//    }
-//        waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
-//            snooze(1);
-//            if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
-//                clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
-//                snooze(0.3);
-//        
-//        if(object.exists(":Notice.Notice_QDialog"))
-//        {
-//            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
-//                clickButton(":Notice.Remind me about this again._QCheckBox");
-//            snooze(0.2);
-//            waitForObject(":Notice.OK_QPushButton");
-//            clickButton(":Notice.OK_QPushButton");
-//        }
-//        
-//        waitForObject(":User Preferences.Save_QPushButton_2");
-//        clickButton(":User Preferences.Save_QPushButton_2");
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in editing preferences"+ e);
-//    }  
-//    
-//    //--------Exiting the application------
-//    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//    activateItem(":xTuple ERP: *_QMenuBar", "System");
-//    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
-//    
-//    snooze(5);
-//    
-//    if(OS.name=="Linux")
-//        startApplication("xtuple.bin");
-//    
-//    else
-//        startApplication("xtuple");
-//    
-//    snooze(2);
-//    
-//    loginAppl("CONFIGURE"); 
-//    
-//  
+    snooze(2);
+    //-----Editing of preferences----
+    try
+    {
+        if(OS.name == "Darwin")
+        {
+            activateItem(waitForObjectItem(":xTuple ERP: *_QMenuBar", "Products"));
+            activateItem(waitForObjectItem(":xTuple ERP:*.Products_QMenu", "Preferences..."));
+        }
+        else
+        {
+            
+            waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+            activateItem(":xTuple ERP: *_QMenuBar", "System");
+            waitForObjectItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+            activateItem(":xTuple ERP: *._System_QMenu", "Preferences...");
+        }
+        waitForObject(":Interface Options.Show windows inside workspace_QRadioButton");
+        snooze(1);
+        if(!findObject(":Interface Options.Show windows inside workspace_QRadioButton").checked)
+            clickButton(":Interface Options.Show windows inside workspace_QRadioButton");
+        snooze(0.3);
+        
+        if(object.exists(":Notice.Notice_QDialog"))
+        {
+            if(findObject(":Notice.Remind me about this again._QCheckBox").checked)
+                clickButton(":Notice.Remind me about this again._QCheckBox");
+            snooze(0.2);
+            waitForObject(":Notice.OK_QPushButton");
+            clickButton(":Notice.OK_QPushButton");
+        }
+        
+        waitForObject(":User Preferences.Save_QPushButton_2");
+        clickButton(":User Preferences.Save_QPushButton_2");
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+        activateItem(":xTuple ERP: *._System_QMenu", "Rescan Privileges");
+    }
+    catch(e)
+    {
+        test.fail("Error in editing preferences"+ e);
+    }  
+    
+    //--------Exiting the application------
+    waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+    activateItem(":xTuple ERP: *_QMenuBar", "System");
+    waitForObjectItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    activateItem(":xTuple ERP: *._System_QMenu", "Exit xTuple ERP...");
+    
+    snooze(5);
+    
+    if(OS.name=="Linux")
+        startApplication("xtuple.bin");
+    
+    else
+        startApplication("xtuple");
+    
+    snooze(2);
+    
+    loginAppl("CONFIGURE"); 
+    
+    
   //---find Application Edition------
   try
   {
@@ -110,10 +110,11 @@ function main()
       test.fail("Error in identifying the application edition" + e);       
       
   }
-//  //--------------- Set the window to Tab view mode -------------
-//    tabView();
-    
+  //--------------- Set the window to Tab view mode -------------
+  tabView();
   
+  
+
     //-------New  Chart of Account for Tax Liablities -------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -223,72 +224,67 @@ function main()
     
     //------ Assiging Item to the TAX TYPE -----
     assignTaxType("TAXTRUCK 1",1);
-
-//-------------Creating Customer--------
-  try
-  {
-      waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
-      activateItem(":xTuple ERP: *_QMenuBar", "Sales");
-      waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Customer");
-      activateItem(":xTuple ERP: *.Sales_QMenu", "Customer");
-      waitForObjectItem(":xTuple ERP: *.Customer_QMenu", "New...");
-      activateItem(":xTuple ERP: *.Customer_QMenu", "New...");
-      waitForObject(":Cash Receipt.VirtualClusterLineEdit_CLineEdit");
-      type(":Cash Receipt.VirtualClusterLineEdit_CLineEdit", "Customer 1");
-      waitForObject(":xTuple ERP:*._name_XLineEdit");
-      type(":xTuple ERP:*._name_XLineEdit", "Customer with tax 5%");
-      waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-      clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Settings");
-      nativeType("<Tab>");
-      snooze(0.5);
-      waitForObject(":_defaultGroup._salesrep_XComboBox");
-//      if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "SMASTERS-Sam Masters")
-//          clickItem(":_defaultGroup._salesrep_XComboBox","SMASTERS-Sam Masters",0,0,1,Qt.LeftButton);
-      if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
-          clickItem(":_defaultGroup._salesrep_XComboBox","1000-Sam Masters",0,0,1,Qt.LeftButton);
-      
-      waitForObject(":_settingsTab.Tax_QRadioButton");
-      clickButton(":_settingsTab.Tax_QRadioButton");
-      nativeType("<Tab>");
-      snooze(0.5);
-      waitForObject(":_settingsStack._taxzone_XComboBox");
-      clickItem(":_settingsStack._taxzone_XComboBox","ZONE 1-Tax Zone 1",0,0,5,Qt.LeftButton);
-      nativeType("<Tab>");
-      snooze(0.5);
-      waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
-      clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Addresses");
-      
-      waitForObject(":_addressTab.Ship To_QRadioButton");
-      clickButton(":_addressTab.Ship To_QRadioButton");
-     
-      waitForObject(":_addressStack.New_QPushButton");
-      clickButton(":_addressStack.New_QPushButton");
-      if(!findObject(":Ship-To.Active_QCheckBox").checked)
-          clickButton(":Ship-To.Active_QCheckBox");
-      if(!findObject(":Ship-To.Default_QCheckBox").checked)
-          clickButton(":Ship-To.Default_QCheckBox");
-      waitForObject(":_shipToNumber_XLineEdit");
-      type(":_shipToNumber_XLineEdit", "Store1");
-      waitForObject(":_name_XLineEdit_3");
-      type(":_name_XLineEdit_3", "Store1");
-      waitForObject(":Defaults:._taxzone_XComboBox");
-      clickItem(":Defaults:._taxzone_XComboBox","ZONE 1-Tax Zone 1",0,0,1,Qt.LeftButton);
-      waitForObject(":Select Order for Billing.Save_QPushButton_2");
-      clickButton(":Select Order for Billing.Save_QPushButton_2");
-      waitForObject(":Select Order for Billing.Save_QPushButton");
-      clickButton(":Select Order for Billing.Save_QPushButton");
-      waitForObject(":Sales Order.Cancel_QPushButton");
-      clickButton(":Sales Order.Cancel_QPushButton");
-      
-      test.log("Customer Record is created");
-  }
-  catch(e)
-  {
-      test.fail("Error in creating customer" + e);
-  }
+    
+    //-------------Creating Customer--------
+    try
+    {
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "Sales");
+        activateItem(":xTuple ERP: *_QMenuBar", "Sales");
+        waitForObjectItem(":xTuple ERP: *.Sales_QMenu", "Customer");
+        activateItem(":xTuple ERP: *.Sales_QMenu", "Customer");
+        waitForObjectItem(":xTuple ERP: *.Customer_QMenu", "New...");
+        activateItem(":xTuple ERP: *.Customer_QMenu", "New...");
+        waitForObject(":Cash Receipt.VirtualClusterLineEdit_CLineEdit");
+        type(":Cash Receipt.VirtualClusterLineEdit_CLineEdit", "Customer 1");
+        waitForObject(":xTuple ERP:*._name_XLineEdit");
+        type(":xTuple ERP:*._name_XLineEdit", "Customer with tax 5%");
+        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
+        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Settings");
+        nativeType("<Tab>");
+        snooze(0.5);
+       
+        waitForObject(":_settingsTab.Tax_QRadioButton");
+        clickButton(":_settingsTab.Tax_QRadioButton");
+        nativeType("<Tab>");
+        snooze(0.5);
+        waitForObject(":_settingsStack._taxzone_XComboBox");
+        clickItem(":_settingsStack._taxzone_XComboBox","ZONE 1-Tax Zone 1",0,0,5,Qt.LeftButton);
+        nativeType("<Tab>");
+        snooze(0.5);
+        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
+        clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Addresses");
+        
+        waitForObject(":_addressTab.Ship To_QRadioButton");
+        clickButton(":_addressTab.Ship To_QRadioButton");
+        
+        waitForObject(":_addressStack.New_QPushButton");
+        clickButton(":_addressStack.New_QPushButton");
+        if(!findObject(":Ship-To.Active_QCheckBox").checked)
+            clickButton(":Ship-To.Active_QCheckBox");
+        if(!findObject(":Ship-To.Default_QCheckBox").checked)
+            clickButton(":Ship-To.Default_QCheckBox");
+        waitForObject(":_shipToNumber_XLineEdit");
+        type(":_shipToNumber_XLineEdit", "Store1");
+        waitForObject(":_name_XLineEdit_3");
+        type(":_name_XLineEdit_3", "Store1");
+        waitForObject(":Defaults:._taxzone_XComboBox");
+        clickItem(":Defaults:._taxzone_XComboBox","ZONE 1-Tax Zone 1",0,0,1,Qt.LeftButton);
+        waitForObject(":Select Order for Billing.Save_QPushButton_2");
+        clickButton(":Select Order for Billing.Save_QPushButton_2");
+        waitForObject(":Select Order for Billing.Save_QPushButton");
+        clickButton(":Select Order for Billing.Save_QPushButton");
+        waitForObject(":Sales Order.Cancel_QPushButton");
+        clickButton(":Sales Order.Cancel_QPushButton");
+        
+        test.log("Customer Record is created");
+    }
+    catch(e)
+    {
+        test.fail("Error in creating customer" + e);
+    }
     //----- Expense Category Creation ---------
-  try{
-      
+    try{
+        
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
         activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
         waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Setup...");
@@ -352,8 +348,8 @@ function main()
     {
         test.fail("Error in creating Expense Categories"+e);
     }
-//--------- Sales Order Creation -------
-  
+    //--------- Sales Order Creation -------
+    
     var sonumber1 = createSalesOrder1("TAXTRUCK 1", "100","CUSTOMER 1");
     //------ Verifying the Tax amount calculated ----------
     try{
@@ -370,7 +366,7 @@ function main()
         openItemContextMenu(":_list_XTreeWidget_5",sonumber1, 5, 5, Qt.LeftButton);  
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Edit...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Edit...");
-               waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
+        waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Line Items");
         snooze(0.5);
         var sotaxamt1 = findObject(":_lineItemsPage.XLineEdit_XLineEdit_4").text;
@@ -411,7 +407,7 @@ function main()
         waitForObject(":_frame.Issue All_QPushButton");
         clickButton(":_frame.Issue All_QPushButton");
         
-      
+        
         //-----Ship the Sales Order (with'Select for Billing' option checked)-----
         waitForObject(":Issue to Shipping.Ship_QPushButton");
         clickButton(":Issue to Shipping.Ship_QPushButton");
@@ -489,7 +485,7 @@ function main()
         waitForObjectItem(":xTuple ERP:*._menu_QMenu", "Post...");
         activateItem(":xTuple ERP:*._menu_QMenu", "Post...");
         snooze(1);
-
+        
         waitForObject(":List Unposted Invoices.Continue_QPushButton");
         clickButton(":List Unposted Invoices.Continue_QPushButton");
         waitForObject(":Quotes.Close_QToolButton");
@@ -523,7 +519,7 @@ function main()
         test.fail("No Tax History is available for the "+ invnum1+" invoice tax amount");
 
     //--------- Creating A/R Misc.Credit Memo ----------
-  try{
+    try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
         activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
         waitForObjectItem(":xTuple ERP: *.Accounting_QMenu", "Accounts Receivable");
@@ -584,12 +580,12 @@ function main()
         test.fail("No GL entry is made for misc.credit memo" + arcmnum1+"");
     //-----Tax History Verification for A/R Misc.Credit Memo -----------
     
-    bool = cmTaxHistory("Code 1");
+    bool = cmTaxHistory(arcmnum1,"Code 1-Tax Code 1");
     if(bool == 1)
     {
         test.pass("misc.credit memo" + arcmnum1 + " has a Tax History entry for its tax amount");
     }
     else
         test.fail("No Tax History is available for the "+arcmnum1+" misc.credit memo tax amount");
-  
+    
 }

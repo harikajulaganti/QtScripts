@@ -48,8 +48,8 @@ function main()
         test.fail("Error in identifying the application edition" + e);       
         
     }
-//  //--------------- Set the window to Tab view mode -------------
-//    tabView();
+  //--------------- Set the window to Tab view mode -------------
+    tabView();
     
     //-------New  Chart of Account for Tax Liablities -------
     try{
@@ -162,6 +162,7 @@ function main()
   
     //------ Assiging Item to the TAX TYPE -----
     assignTaxType("TAXTRUCK 3",3);
+    
     //-------------Creating Customer--------
     try
     {
@@ -180,12 +181,7 @@ function main()
         nativeType("<Tab>");
         waitForObject(":Sales Order.qt_tabwidget_tabbar_QTabBar");
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Settings");
-        waitForObject(":_defaultGroup._salesrep_XComboBox");
-        if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
-            clickItem(":_defaultGroup._salesrep_XComboBox","1000-Sam Masters",0,0,1,Qt.LeftButton);
-//        if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
-//            clickItem(":_defaultGroup._salesrep_XComboBox","SMASTERS-Sam Masters",0,0,1,Qt.LeftButton);
-        
+              
         waitForObject(":_settingsTab.Tax_QRadioButton");
         clickButton(":_settingsTab.Tax_QRadioButton");
         waitForObject(":_settingsStack._taxzone_XComboBox");
@@ -287,7 +283,7 @@ function main()
         test.fail("Error in creating Expense Categories"+e);
     }
     //--------- Sales Order Creation -------
-    
+  
     var sonumber3 = createSalesOrder1("TAXTRUCK 3", "100","CUSTOMER 3");
     //------ Verifying the Tax amount calculted ----------
     try{
@@ -519,7 +515,7 @@ function main()
         test.fail("No GL entry is made for misc.credit memo" + arcmnum3+"");
     //-----Tax History Verification for A/R Misc.Credit Memo -----------
     
-    bool = cmTaxHistory("Code 3");
+    bool = cmTaxHistory(arcmnum3,"Code 3-Tax Code 3");
     if(bool == 1)
     {
         test.pass("MIsc.Credit Memo" + arcmnum3 + " has a Tax History entry for its tax amount");

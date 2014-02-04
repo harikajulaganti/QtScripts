@@ -5,50 +5,51 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-//     //---find Application Edition------
-//    try
-//    {
-//        
-//        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
-//        activateItem(":xTuple ERP: *_QMenuBar", "System");
-//        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Setup...");
-//        activateItem(":xTuple ERP: *._System_QMenu", "Setup...");
-//        waitForObject(":Configure.Database_QModelIndex");
-//        mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton);
-//        
-//        if(findObject(":Setup._tree_XTreeWidget").itemsExpandable==true)
-//        {
-//            waitForObject(":Configure.Database_QModelIndex");
-//            mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton);
-//        }
-//        else
-//        {
-//            waitForObject(":_tree.Configure_QModelIndex");
-//            mouseClick(":_tree.Configure_QModelIndex",0, 0, 0, Qt.LeftButton);
-//            waitForObject(":Configure.Database_QModelIndex");
-//            mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton); 
-//        }
-//        
-//        waitForObject(":Database Information.*_QLabel");
-//        var appEdition = findObject(":Database Information.*_QLabel").text;
-//        
-//        if(object.exists(":_stack.Use toolbars on displays when available_QCheckBox"))
-//        {
-//            waitForObject(":_stack.Use toolbars on displays when available_QCheckBox");
-//            if(!findObject(":_stack.Use toolbars on displays when available_QCheckBox").checked)
-//                clickButton(":_stack.Use toolbars on displays when available_QCheckBox");
-//        }
-//        waitForObject(":Setup.Save_QPushButton");
-//        clickButton(":Setup.Save_QPushButton");
-//    }
-//    catch(e)
-//    {
-//        test.fail("Error in identifying the application edition" + e);       
-//        
-//    }
-////    //--------------- Set the window to Tab view mode -------------
-////    tabView();
-////    
+    snooze(1);
+    //---find Application Edition------
+    try
+    {
+        
+        waitForObjectItem(":xTuple ERP: *_QMenuBar", "System");
+        activateItem(":xTuple ERP: *_QMenuBar", "System");
+        waitForObjectItem(":xTuple ERP: *._System_QMenu", "Setup...");
+        activateItem(":xTuple ERP: *._System_QMenu", "Setup...");
+        waitForObject(":Configure.Database_QModelIndex");
+        mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton);
+        
+        if(findObject(":Setup._tree_XTreeWidget").itemsExpandable==true)
+        {
+            waitForObject(":Configure.Database_QModelIndex");
+            mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton);
+        }
+        else
+        {
+            waitForObject(":_tree.Configure_QModelIndex");
+            mouseClick(":_tree.Configure_QModelIndex",0, 0, 0, Qt.LeftButton);
+            waitForObject(":Configure.Database_QModelIndex");
+            mouseClick(":Configure.Database_QModelIndex", 0, 0, 0, Qt.LeftButton); 
+        }
+        
+        waitForObject(":Database Information.*_QLabel");
+        var appEdition = findObject(":Database Information.*_QLabel").text;
+        
+        if(object.exists(":_stack.Use toolbars on displays when available_QCheckBox"))
+        {
+            waitForObject(":_stack.Use toolbars on displays when available_QCheckBox");
+            if(!findObject(":_stack.Use toolbars on displays when available_QCheckBox").checked)
+                clickButton(":_stack.Use toolbars on displays when available_QCheckBox");
+        }
+        waitForObject(":Setup.Save_QPushButton");
+        clickButton(":Setup.Save_QPushButton");
+    }
+    catch(e)
+    {
+        test.fail("Error in identifying the application edition" + e);       
+        
+    }
+    //--------------- Set the window to Tab view mode -------------
+    tabView();
+    
   //     ------ Creating Vendor ------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Purchase");
@@ -99,7 +100,7 @@ function main()
     {
         test.fail("Error in creating Vendor"+e);
     }
-    snooze(3);
+  snooze(3);
   var sourceitem = "TBOX1";
   var targetitem = "TAXBOX 2";
     //----- Purchase Type Item Creation -----
@@ -167,10 +168,10 @@ function main()
    //--------- Item Site creation -------
    
     createRIS("TAXBOX 2");
-  
+
     //------ Assiging Item to the TAX TYPE -----
     assignTaxType("TAXBOX 2",2);
-    
+  
   //--------- Purchase Order Creation ----------
   try{
       
@@ -238,8 +239,8 @@ function main()
   {
       test.fail("Error in creating purchase order" + e);
   }
-  
-  //-----Releasing Purchase Orders-----
+
+    //-----Releasing Purchase Orders-----
   try
   {
       waitForObjectItem(":xTuple ERP: *_QMenuBar", "Purchase");

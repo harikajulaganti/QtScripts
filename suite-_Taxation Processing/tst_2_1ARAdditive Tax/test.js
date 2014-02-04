@@ -5,7 +5,7 @@ function main()
     
     //-----login Application-----
     loginAppl("CONFIGURE"); 
-    
+    snooze(1);
     //---find Application Edition------
     try
     {
@@ -47,9 +47,9 @@ function main()
         test.fail("Error in identifying the application edition" + e);       
         
     }
-//    //--------------- Set the window to Tab view mode -------------
-//    tabView();
-//    
+    //--------------- Set the window to Tab view mode -------------
+    tabView();
+  
     //-------New  Chart of Account for Tax Liablities -------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -168,7 +168,7 @@ function main()
     
     
     
-    //    //------ Assiging Item to the TAX TYPE -----
+    //------ Assiging Item to the TAX TYPE -----
     assignTaxType("TAXTRUCK 2",2);
     
     //-------------Creating Customer--------
@@ -190,11 +190,6 @@ function main()
         clickTab(":Sales Order.qt_tabwidget_tabbar_QTabBar", "Settings");
         snooze(0.5);
         nativeType("<Tab>");
-        waitForObject(":_defaultGroup._salesrep_XComboBox");
-        if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "1000-Sam Masters")
-            clickItem(":_defaultGroup._salesrep_XComboBox","1000-Sam Masters",0,0,1,Qt.LeftButton);
-//        if(findObject(":_defaultGroup._salesrep_XComboBox").currentText!= "SMASTERS-Sam Masters")
-//            clickItem(":_defaultGroup._salesrep_XComboBox","SMASTERS-Sam Masters",0,0,1,Qt.LeftButton);
         waitForObject(":_settingsTab.Tax_QRadioButton");
         clickButton(":_settingsTab.Tax_QRadioButton");
         nativeType("<Tab>");
@@ -468,7 +463,7 @@ function main()
         test.fail("No Tax History is available for the "+ invnum2+" invoice tax amount");
     
  
-    //--------- Creating A/R Misc.Credit Memo ----------
+  //--------- Creating A/R Misc.Credit Memo ----------
     try{
         waitForObjectItem(":xTuple ERP: *_QMenuBar", "Accounting");
         activateItem(":xTuple ERP: *_QMenuBar", "Accounting");
@@ -531,7 +526,7 @@ function main()
         test.fail("No GL entry is made for misc.credit memo" + arcmnum2+"");
     //-----Tax History Verification for A/R Misc.Credit Memo -----------
     
-    bool = cmTaxHistory("Code 2");
+    bool = cmTaxHistory(arcmnum2, "Code 2-Tax Code 2");
     if(bool == 1)
     {
         test.pass("MIsc.Credit Memo" + arcmnum2 + " has a Tax History entry for its tax amount");

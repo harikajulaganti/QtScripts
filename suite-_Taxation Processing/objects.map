@@ -373,8 +373,11 @@
 :Log In.Options..._QPushButton_2	{text='Options...' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton	{name='_recent' text='Recent' type='QPushButton' visible='1' window=':Log In_login2'}
 :Log In.Recent_QPushButton_2	{text='Recent' type='QPushButton' unnamed='1' visible='1' window=':Log In_login2'}
+:Log In._database_QComboBox	{name='_database' type='QComboBox' visible='1' window=':Log In_login2'}
 :Log In._frame_QFrame	{name='_frame' type='QFrame' visible='1' window=':Log In_login2'}
 :Log In._logo_QLabel	{name='_logo' type='QLabel' visible='1' window=':Log In_login2'}
+:Log In._port_QLineEdit	{name='_port' type='QLineEdit' visible='1' window=':Log In_login2'}
+:Log In._server_QLineEdit	{name='_server' type='QLineEdit' visible='1' window=':Log In_login2'}
 :Log In_login2	{name='login2' type='login2' visible='1' windowTitle='Log In'}
 :Login Options.Database:_QLabel	{name='_databaseLit' text='Database:' type='QLabel' visible='1' window=':Login Options_login2Options'}
 :Login Options.Port:_QLabel	{name='_portLit' text='Port:' type='QLabel' visible='1' window=':Login Options_login2Options'}
@@ -787,6 +790,7 @@
 :_cust.ZCUSTOMER_QModelIndex	{column='1' text='ZCUSTOMER' type='QModelIndex'}
 :_custhist.60091_QModelIndex	{column='2' text='60091' type='QModelIndex'}
 :_database_QLineEdit	{buddy=':Login Options.Database:_QLabel' name='_database' type='QLineEdit' visible='1'}
+:_database_QLineEdit_2	{parentWidget=':Log In._database_QComboBox' type='QLineEdit' unnamed='1' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit	{name='XDateEdit' type='XDateEdit' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit_2	{name='XDateEdit' occurrence='2' type='XDateEdit' visible='1'}
 :_dateGroup.XDateEdit_XDateEdit_3	{name='XDateEdit' occurrence='2' type='XDateEdit' visible='1'}
@@ -1716,6 +1720,7 @@
 :xTuple ERP:*.Select Order for Billing_QWorkspaceChild	{name='qt_workspacechild' type='QWorkspaceChild' visible='1'}
 :xTuple ERP:*.Show only tax_QGroupBox	{name='_showOnlyGroup' title='Show only tax' type='QGroupBox' visible='1'}
 :xTuple ERP:*.Show_QGroupBox	{name='_showGroup' title='Show' type='QGroupBox' visible='1'}
+:xTuple ERP:*.Summarize by_QGroupBox	{name='_showOnlyGroup' title='Summarize by' type='QGroupBox' visible='1' window=':xTuple ERP: Manufacturing Edition 3.3.0 - Practice Database on 192.168.1.61/1demo330-mfg AS admin_GUIClient_2'}
 :xTuple ERP:*.Tax History_dspTaxHistory	{name='dspTaxHistory' type='dspTaxHistory' visible='1' windowTitle='Tax History'}
 :xTuple ERP:*.Tax_QMenu	{title='Tax' type='QMenu' visible='1'}
 :xTuple ERP:*.Transactions_QMenu	{title='Transactions' type='QMenu' visible='1'}
@@ -1728,6 +1733,7 @@
 :xTuple ERP:*.VirtualClusterLineEdit_OrderLineEdit	{name='VirtualClusterLineEdit' type='OrderLineEdit' visible='1'}
 :xTuple ERP:*.Voucher_QMenu	{title='Voucher' type='QMenu' visible='1'}
 :xTuple ERP:*.Voucher_QMenu_2	{title='Voucher' type='QMenu' visible='1'}
+:xTuple ERP:*.Window_QMenu	{title='Window' type='QMenu' visible='1'}
 :xTuple ERP:*.Write Check To:_QGroupBox	{name='_recipGroup' title='Write Check To:' type='QGroupBox' visible='1'}
 :xTuple ERP:*.XDateEdit_XDateEdit	{name='XDateEdit' type='XDateEdit' visible='1'}
 :xTuple ERP:*.XLineEdit_XLineEdit	{name='XLineEdit' type='XLineEdit' visible='1'}
